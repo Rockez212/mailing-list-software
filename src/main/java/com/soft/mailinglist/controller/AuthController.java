@@ -1,5 +1,7 @@
 package com.soft.mailinglist.controller;
 
+import com.soft.mailinglist.command.LoginCommand;
+import com.soft.mailinglist.command.RegisterCommand;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,7 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody AuthCommand command) {
+    public ResponseEntity<String> login(@RequestBody LoginCommand command) {
         //
     }
 
