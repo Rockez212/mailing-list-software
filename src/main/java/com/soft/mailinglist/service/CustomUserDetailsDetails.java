@@ -1,6 +1,5 @@
 package com.soft.mailinglist.service;
 
-import com.soft.mailinglist.entity.User;
 import com.soft.mailinglist.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CustomUserDetails implements UserDetailsService {
+public class CustomUserDetailsDetails implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override

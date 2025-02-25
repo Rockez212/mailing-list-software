@@ -17,12 +17,22 @@ public class JWTUtill {
     @Value("${jwt_secret}")
     private String secret;
 
-    public String generateToken(String userId,String email) {
+    public String generateToken(String email) {
         Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(60).toInstant());
         return JWT.create()
                 .withSubject("USER TOKEN")
-                .withClaim("userId",userId)
-                .withClaim("email", email)
+                .withClaim("email: ",email)
+                .withIssuedAt(new Date())
+                .withIssuer("ROCKEZ")
+                .withExpiresAt(expirationDate)
+                .sign(Algorithm.HMAC256(secret));
+    }
+
+    public String generateRefreshToken(String email) {
+        Date expirationDate = Date.from(ZonedDateTime.now().plusDays(7).toInstant());
+        return JWT.create()
+                .withSubject("REFRESH TOKEN")
+                .withClaim("email: ", email)
                 .withIssuedAt(new Date())
                 .withIssuer("ROCKEZ")
                 .withExpiresAt(expirationDate)

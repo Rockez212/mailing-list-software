@@ -1,0 +1,28 @@
+### User Registration
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "username": "Rockez666",
+  "email": "ghertalilian2006@gmail.com",
+  "password": "12345678"
+}
+
+### User Login
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "username": "Rockez666",
+  "password": "12345678"
+}
+
+> {%
+    if (response && response.body) {
+        const jwtToken = response.body;
+        client.global.set("jwtToken", jwtToken);
+        console.log("JWT Token successfully set:", jwtToken);
+    } else {
+        console.error("Response body is undefined or empty.");
+    }
+%}

@@ -2,7 +2,7 @@ package com.soft.mailinglist.util;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.soft.mailinglist.entity.User;
-import com.soft.mailinglist.service.CustomUserDetails;
+import com.soft.mailinglist.service.CustomUserDetailsDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JWTFilter extends OncePerRequestFilter {
     private final JWTUtill jwtUtill;
-    private final CustomUserDetails customUserDetails;
+    private final CustomUserDetailsDetails customUserDetails;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {

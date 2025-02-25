@@ -8,14 +8,14 @@ import java.time.LocalDateTime;
 
 @Data
 public class RequestDTO {
-    private String email;
+    private String toEmail;
     private String text;
     private RequestStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime doneAt;
 
-    public RequestDTO(String email, String text, RequestStatus status, LocalDateTime createdAt, LocalDateTime doneAt) {
-        this.email = email;
+    public RequestDTO(String toEmail, String text, RequestStatus status, LocalDateTime createdAt, LocalDateTime doneAt) {
+        this.toEmail = toEmail;
         this.text = text;
         this.status = status;
         this.createdAt = createdAt;
