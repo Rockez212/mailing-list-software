@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>HELLO</title>
+    <title>Ваш запрос</title>
 </head>
 <body>
-<h1>HELLO</h1>
+<p>Hello, <b th:text="${email}"></b>!</p>
+<p>Message: </p>
+<blockquote th:text="${text}"></blockquote>
 </body>
 </html>

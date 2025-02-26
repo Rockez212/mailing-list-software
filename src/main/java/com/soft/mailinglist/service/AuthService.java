@@ -21,11 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
+
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final JWTUtill jwtUtill;
     private final AuthenticationManager authenticationManager;
-
 
     @Transactional
     public void register(RegisterCommand registerCommand) {

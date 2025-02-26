@@ -9,11 +9,11 @@ import lombok.Data;
 public class RegisterCommand {
     @NotBlank(message = "Username must not be empty")
     private String username;
-    @NotBlank(message = "Password must not be empty")
-    @Size(min = 8,max = 8, message = "Password must be exactly 8 characters long")
-    private String email;
     @NotBlank(message = "email must not be empty")
     @Email(message = "Incorrect email")
+    private String email;
+    @NotBlank(message = "Password must not be empty")
+    @Size(min = 8,max = 8, message = "Password must be exactly 8 characters long")
     private String password;
 
 

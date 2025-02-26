@@ -1,9 +1,6 @@
 package com.soft.mailinglist.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,14 +8,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users_details")
-
 @Getter
 @Setter
 public class User implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     @Column(name = "username")
     private String username;
@@ -29,15 +28,15 @@ public class User implements UserDetails {
     @Column(name = "refresh_token")
     private String refreshToken;
 
-    public User () {
-
-    }
-
     public User(String username, String email, String password,String refreshToken) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.refreshToken = refreshToken;
+    }
+
+    public User () {
+
     }
 
     @Override
@@ -73,5 +72,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

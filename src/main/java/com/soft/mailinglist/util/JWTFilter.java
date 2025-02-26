@@ -32,13 +32,13 @@ public class JWTFilter extends OncePerRequestFilter {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             } else {
                 try {
-                    Map<String,String> claims = jwtUtill.validateToken(token);
+                    Map<String, String> claims = jwtUtill.validateToken(token);
                     String username = claims.get("username");
 
                     User user = (User) customUserDetails.loadUserByUsername(username);
 
                     UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
+                            new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
                     if (SecurityContextHolder.getContext().getAuthentication() == null) {
                         SecurityContextHolder.getContext().setAuthentication(authentication);

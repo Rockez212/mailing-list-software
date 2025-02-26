@@ -6,16 +6,19 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/request")
 @RequiredArgsConstructor
 public class RequestController {
 
     private final RequestService requestService;
 
-    @Transactional
+    @PostMapping("/registerRequest")
     public ResponseEntity<String> registerRequest(@RequestBody @Valid RequestCommand requestCommand) {
         requestService.registerRequest(requestCommand);
         return ResponseEntity.ok("Request registered successfully");
