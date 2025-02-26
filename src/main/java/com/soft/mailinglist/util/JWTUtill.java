@@ -19,11 +19,11 @@ public class JWTUtill {
     @Value("${jwt_secret}")
     private String secret;
 
-    public String generateToken(String email) {
+    public String generateToken(String username) {
         Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(60).toInstant());
         return JWT.create()
                 .withSubject("USER TOKEN")
-                .withClaim("email: ",email)
+                .withClaim("username",username)
                 .withIssuedAt(new Date())
                 .withIssuer("ROCKEZ")
                 .withExpiresAt(expirationDate)

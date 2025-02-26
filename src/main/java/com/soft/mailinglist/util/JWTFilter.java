@@ -2,7 +2,7 @@ package com.soft.mailinglist.util;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.soft.mailinglist.entity.User;
-import com.soft.mailinglist.service.CustomUserDetailsDetails;
+import com.soft.mailinglist.service.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -20,7 +21,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JWTFilter extends OncePerRequestFilter {
     private final JWTUtill jwtUtill;
-    private final CustomUserDetailsDetails customUserDetails;
+    private final CustomUserDetailsService customUserDetails;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -35,10 +36,10 @@ public class JWTFilter extends OncePerRequestFilter {
                     Map<String, String> claims = jwtUtill.validateToken(token);
                     String username = claims.get("username");
 
-                    User user = (User) customUserDetails.loadUserByUsername(username);
+                    UserDetails userDetails = customUserDetails.loadUserByUsername(username);
 
                     UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
                     if (SecurityContextHolder.getContext().getAuthentication() == null) {
                         SecurityContextHolder.getContext().setAuthentication(authentication);

@@ -13,7 +13,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "requests")
 public class Request {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

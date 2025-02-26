@@ -1,5 +1,7 @@
 package com.soft.mailinglist.controller;
 
+import com.soft.mailinglist.exception.InvalidPasswordException;
+import com.soft.mailinglist.exception.RequestsHaveAlreadyBeenCompleted;
 import com.soft.mailinglist.exception.UsernameOrEmailExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,16 @@ public class HandleController {
 
     @ExceptionHandler(UsernameOrEmailExistException.class)
     public ResponseEntity<String> handleAmountMustBeGreaterThanZeroException(UsernameOrEmailExistException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<String> handleInvalidPasswordException(InvalidPasswordException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler(RequestsHaveAlreadyBeenCompleted.class)
+    public ResponseEntity<String> handleRequestsHaveAlreadyBeenCompleted(RequestsHaveAlreadyBeenCompleted e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 

@@ -40,7 +40,6 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public String login(LoginCommand loginCommand) {
-        User user = userRepository.findByUsername(loginCommand.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         UsernamePasswordAuthenticationToken authInPutToken = new UsernamePasswordAuthenticationToken
                 (loginCommand.getUsername(), loginCommand.getPassword());
         try {
@@ -48,12 +47,12 @@ public class AuthService {
         } catch (BadCredentialsException e) {
             throw new InvalidPasswordException("Invalid credentials");
         }
-        return jwtUtill.generateToken(user.getEmail());
+        return jwtUtill.generateToken(loginCommand.getUsername());
 
 
     }
     private void checkIfUsernameOrEmailExists(String username, String email) {
-        if (userRepository.findByUsername(username).isPresent() | userRepository.findByEmail(email).isPresent()) {
+        if (userRepository.findByUsername(username).isPresent() || userRepository.findByEmail(email).isPresent()) {
             throw new UsernameOrEmailExistException("Username or email already exists");
         }
     }

@@ -30,9 +30,8 @@ Content-Type: application/json
 ### Request Register
 POST http://localhost:8080/request/registerRequest
 Content-Type: application/json
-Authorization: Bearer {{jwtToken}}
 
 {
-  "email": "rockez161@gmail.com",
+  "email": "ghertalilian2006@gmail.com",
   "text": "hello, user!"
 }

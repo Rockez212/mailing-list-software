@@ -18,7 +18,7 @@ public class EmailService {
     private final SpringTemplateEngine templateEngine;
 
     @Async
-    public void sendLinkToResetPassword(String email, String text) {
+    public void sendRequestTOEmail(String email, String text) {
         Context context = new Context();
         context.setVariable("email", email);
         context.setVariable("text", text);
