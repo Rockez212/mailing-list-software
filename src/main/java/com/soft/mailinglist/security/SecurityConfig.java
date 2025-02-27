@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 // auth controller
                 .requestMatchers("auth/**").permitAll()
-                .requestMatchers("request/registerRequest").permitAll()
+                .requestMatchers("request/registerRequest").authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
