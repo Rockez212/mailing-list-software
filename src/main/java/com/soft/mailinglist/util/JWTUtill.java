@@ -34,7 +34,7 @@ public class JWTUtill {
         Date expirationDate = Date.from(ZonedDateTime.now().plusDays(7).toInstant());
         return JWT.create()
                 .withSubject("REFRESH TOKEN")
-                .withClaim("email: ", email)
+                .withClaim("email", email)
                 .withIssuedAt(new Date())
                 .withIssuer("ROCKEZ")
                 .withExpiresAt(expirationDate)
@@ -48,7 +48,7 @@ public class JWTUtill {
 
         DecodedJWT jwt = verifier.verify(token);
         Map<String,String> claims = new HashMap<>();
-        jwt.getClaims().forEach((key,value)->claims.put(key,value.toString()));
+        jwt.getClaims().forEach((key,value)->claims.put(key,value.asString()));
 
         return claims;
     }

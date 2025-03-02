@@ -1,8 +1,6 @@
 package com.soft.mailinglist.util;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.soft.mailinglist.entity.User;
-import com.soft.mailinglist.service.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -21,8 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JWTFilter extends OncePerRequestFilter {
     private final JWTUtill jwtUtill;
-    private final CustomUserDetailsService customUserDetails;
-
+    private final UserDetailsService userDetailsService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String authorizationHeader = request.getHeader("Authorization");
@@ -36,7 +34,7 @@ public class JWTFilter extends OncePerRequestFilter {
                     Map<String, String> claims = jwtUtill.validateToken(token);
                     String username = claims.get("username");
 
-                    UserDetails userDetails = customUserDetails.loadUserByUsername(username);
+                    UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
