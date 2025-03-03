@@ -1,11 +1,13 @@
 package com.soft.mailinglist.controller;
 
 import com.soft.mailinglist.command.LoginCommand;
+import com.soft.mailinglist.command.RefreshCommand;
 import com.soft.mailinglist.command.RegisterCommand;
+import com.soft.mailinglist.command.TokenResponse;
 import com.soft.mailinglist.service.AuthService;
+import com.soft.mailinglist.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthService authService;
+    private final TokenService tokenService;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterCommand registerCommand) {
@@ -26,8 +29,15 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginCommand registerCommand) {
-        String token = authService.login(registerCommand);
-        return ResponseEntity.ok(token);
+    public ResponseEntity<TokenResponse> login(@RequestBody LoginCommand registerCommand) {
+        TokenResponse accessToken = authService.login(registerCommand);
+        return ResponseEntity.ok(accessToken);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<TokenResponse> refreshToken(@RequestBody RefreshCommand command) {
+        String refreshToken = command.getRefreshToken();
+        TokenResponse tokensResponse = tokenService.updatedAccessToken(refreshToken);
+        return ResponseEntity.ok(tokensResponse);
     }
 }

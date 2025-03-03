@@ -2,6 +2,7 @@ package com.soft.mailinglist.controller;
 
 import com.soft.mailinglist.exception.InvalidPasswordException;
 import com.soft.mailinglist.exception.RequestsHaveAlreadyBeenCompleted;
+import com.soft.mailinglist.exception.UserNotFoundException;
 import com.soft.mailinglist.exception.UsernameOrEmailExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,10 @@ public class HandleController {
     @ExceptionHandler(RequestsHaveAlreadyBeenCompleted.class)
     public ResponseEntity<String> handleRequestsHaveAlreadyBeenCompleted(RequestsHaveAlreadyBeenCompleted e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
 }

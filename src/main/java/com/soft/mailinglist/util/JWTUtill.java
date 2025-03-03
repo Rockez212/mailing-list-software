@@ -19,8 +19,8 @@ public class JWTUtill {
     @Value("${jwt_secret}")
     private String secret;
 
-    public String generateToken(String username) {
-        Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(60).toInstant());
+    public String generateAccessToken(String username) {
+        Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(15).toInstant());
         return JWT.create()
                 .withSubject("USER TOKEN")
                 .withClaim("username",username)
@@ -30,11 +30,11 @@ public class JWTUtill {
                 .sign(Algorithm.HMAC256(secret));
     }
 
-    public String generateRefreshToken(String email) {
+    public String generateRefreshToken(String username) {
         Date expirationDate = Date.from(ZonedDateTime.now().plusDays(7).toInstant());
         return JWT.create()
                 .withSubject("REFRESH TOKEN")
-                .withClaim("email", email)
+                .withClaim("username", username)
                 .withIssuedAt(new Date())
                 .withIssuer("ROCKEZ")
                 .withExpiresAt(expirationDate)
@@ -52,6 +52,4 @@ public class JWTUtill {
 
         return claims;
     }
-
-
 }

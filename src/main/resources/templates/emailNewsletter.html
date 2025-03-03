@@ -1,8 +1,39 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Ваш запрос</title>
+    <style>
+        ody {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        b {
+            color: #007bff;
+        }
+
+        blockquote {
+            background: #fff;
+            border-left: 5px solid #007bff;
+            margin: 20px auto;
+            padding: 15px;
+            font-style: italic;
+            font-size: 16px;
+            max-width: 600px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
 </head>
 <body>
 <p>Hello, <b th:text="${email}"></b>!</p>

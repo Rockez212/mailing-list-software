@@ -19,21 +19,47 @@ Content-Type: application/json
 
 > {%
     if (response && response.body) {
-        const jwtToken = response.body;
-        client.global.set("jwtToken", jwtToken);
-        console.log("JWT Token successfully set:", jwtToken);
+        const { accessToken, refreshToken } = response.body;
+        client.global.set("accessToken", accessToken);
+        console.log("Access token successfully set:", accessToken);
+
+        client.global.set("refreshToken", refreshToken);
+        console.log("Refresh token successfully set:", refreshToken);
+
     } else {
         console.error("Response body is undefined or empty.");
     }
 %}
 
 ### Request Register
-POST http://localhost:8080/request/registerRequest
+POST http://localhost:8080/request/register
 Content-Type: application/json
-Authorization: Bearer {{jwtToken}}
-
+Authorization: Bearer {{accessToken}}
 
 {
   "email": "ghertalilian2006@gmail.com",
   "text": "hello, user!"
 }
+
+### Refresh Token
+POST localhost:8080/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": {{refreshToken}}
+}
+> {%
+    if (response && response.body) {
+        const { accessToken, refreshToken } = response.body;
+        client.global.set("accessToken", accessToken);
+        console.log("New access token successfully set:", accessToken);
+
+        client.global.set("refreshToken", refreshToken);
+        console.log("New refresh token successfully set:", refreshToken);
+
+    } else {
+        console.error("Response body is undefined or empty.");
+    }
+%}
+
+
