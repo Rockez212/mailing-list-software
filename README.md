@@ -97,14 +97,11 @@ Request body:
 }
 ```
 
-## Разработка
+## Development
 - **src/main/java/com/soft/mailinglist** – the main logic of the project
 - **service/** – authentication business logic
 - **controller/** – REST API conroller
 - **security/** – Spring Security settings
 - **util/** – JWT-utill
-
-## Лицензия
-Этот проект распространяется под MIT лицензией.
 
 ****
