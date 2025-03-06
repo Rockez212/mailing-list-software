@@ -1,7 +1,7 @@
 # Mailing List API
 
 ## Description
-Mailing List API — is a service for authentication and management of users with JWT tokens. Includes registration, login, token refresh and route protection.
+Mailing List API — is a service for authentication and management of users with JWT tokens. Includes registration, login, token refresh.
 
 ## Technology stack
 - Java 17
