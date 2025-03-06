@@ -28,9 +28,9 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests()
                 // auth controller
+                .requestMatchers("auth/refresh").permitAll()
                 .requestMatchers("auth/register").permitAll()
                 .requestMatchers("auth/login").permitAll()
-                .requestMatchers("auth/refresh").permitAll()
                 .requestMatchers("request/register").authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

@@ -20,7 +20,7 @@ public class JWTUtill {
     private String secret;
 
     public String generateAccessToken(String username) {
-        Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(15).toInstant());
+        Date expirationDate = Date.from(ZonedDateTime.now().plusSeconds(10).toInstant());
         return JWT.create()
                 .withSubject("USER TOKEN")
                 .withClaim("username",username)

@@ -35,8 +35,10 @@ public class TokenService {
 
         String newAccessToken = jwtUtill.generateAccessToken(username);
         String newRefreshToken = jwtUtill.generateRefreshToken(username);
+
         user.setRefreshToken(newRefreshToken);
         userRepository.save(user);
+
         return new TokenResponse(newAccessToken, newRefreshToken);
     }
 
