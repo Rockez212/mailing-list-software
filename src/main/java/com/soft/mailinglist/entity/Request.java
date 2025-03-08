@@ -8,13 +8,13 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "requests")
+@Getter
+@Setter
 public class Request {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(name = "email")
     private String toEmail;
@@ -28,7 +28,7 @@ public class Request {
     @Column(name = "doneAt")
     private LocalDateTime doneAt;
 
-    public Request(String toEmail,String text) {
+    public Request(String toEmail, String text) {
         this.toEmail = toEmail;
         this.text = text;
         this.status = RequestStatus.NOT_COMPLETED;
@@ -36,7 +36,7 @@ public class Request {
         this.doneAt = null;
     }
 
-    public Request() {
+    protected Request() {
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.soft.mailinglist.service;
 
-import com.soft.mailinglist.command.RegisterCommand;
 import com.soft.mailinglist.command.RequestCommand;
 import com.soft.mailinglist.entity.Request;
 import com.soft.mailinglist.repository.RequestRepository;

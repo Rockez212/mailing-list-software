@@ -3,8 +3,10 @@ package com.soft.mailinglist.command;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class LoginCommand {
     @NotBlank(message = "Username must not be empty")
     private String username;

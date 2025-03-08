@@ -25,17 +25,14 @@ public class RequestEmailJob {
 
         List<Request> requests = requestRepository.findByStatus(RequestStatus.NOT_COMPLETED)
                 .stream()
-                .sorted(Comparator.comparing(Request::getId))
+                .sorted(Comparator.comparing(Request::getCreatedAt))
                 .toList();
 
-
-        for (Request request : requests) {
-            if (request.getStatus() == RequestStatus.NOT_COMPLETED) {
-                emailService.sendRequestTOEmail(request.getToEmail(), request.getText());
-                request.setStatus(RequestStatus.COMPLETED);
-                request.setDoneAt(LocalDateTime.now());
-            }
-        }
+        requests.forEach(request -> {
+            emailService.sendRequestTOEmail(request.getToEmail(), request.getText());
+            request.setStatus(RequestStatus.COMPLETED);
+            request.setDoneAt(LocalDateTime.now());
+        });
         requestRepository.saveAll(requests);
     }
 }

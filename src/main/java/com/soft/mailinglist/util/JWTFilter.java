@@ -21,6 +21,7 @@ import java.util.Map;
 public class JWTFilter extends OncePerRequestFilter {
     private final JWTUtill jwtUtill;
     private final UserDetailsService userDetailsService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String authorizationHeader = request.getHeader("Authorization");
