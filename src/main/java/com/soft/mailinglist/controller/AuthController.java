@@ -8,12 +8,13 @@ import com.soft.mailinglist.service.AuthService;
 import com.soft.mailinglist.service.TokenService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@Slf4j
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -26,12 +27,14 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@Valid @RequestBody RegisterCommand registerCommand) {
         authService.register(registerCommand);
+        log.info("Registered user: {}", registerCommand.getUsername());
         return ResponseEntity.ok("Registered");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenResponse> login(@Valid @RequestBody LoginCommand registerCommand) {
-        TokenResponse tokensResponse = authService.login(registerCommand);
+    public ResponseEntity<TokenResponse> login(@Valid @RequestBody LoginCommand loginCommand) {
+        TokenResponse tokensResponse = authService.login(loginCommand);
+        log.info("Login successful: {}", loginCommand.getUsername());
         return ResponseEntity.ok(tokensResponse);
     }
 
@@ -39,6 +42,7 @@ public class AuthController {
     public ResponseEntity<TokenResponse> refreshToken(@Valid @RequestBody RefreshCommand command) {
         String refreshToken = command.getRefreshToken();
         TokenResponse tokensResponse = tokenService.updatedAccessToken(refreshToken);
+        log.info("Refresh token successful: {}", refreshToken);
         return ResponseEntity.ok(tokensResponse);
     }
 }
