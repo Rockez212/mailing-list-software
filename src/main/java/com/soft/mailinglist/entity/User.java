@@ -16,7 +16,7 @@ import java.util.Objects;
 @Setter
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "username")
     private String username;
@@ -32,7 +32,6 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
         this.refreshToken = refreshToken;
-
     }
 
     protected User() {
