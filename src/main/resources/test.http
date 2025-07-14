@@ -3,8 +3,8 @@ POST http://localhost:8080/auth/register
 Content-Type: application/json
 
 {
-  "username": "Rockez666",
-  "email": "ghertalilian2006@gmail.com",
+  "username": "",
+  "email": "",
   "password": "12345678"
 }
 
@@ -13,7 +13,7 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "username": "Rockez666",
+  "username": "Rocky",
   "password": "12345678"
 }
 
@@ -36,8 +36,9 @@ POST http://localhost:8080/request/register
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
+
 {
-  "email": "ghertalilian2006@gmail.com",
+  "email": "",
   "text": "hello, user!"
 }
 

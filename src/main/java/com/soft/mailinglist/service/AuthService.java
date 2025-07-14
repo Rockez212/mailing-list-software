@@ -32,6 +32,7 @@ public class AuthService {
     public void register(RegisterCommand registerCommand) {
         String username = registerCommand.getUsername();
         String email = registerCommand.getEmail();
+        log.info("Attempting to register user: username={}, email={}", username, email);
         checkIfUsernameOrEmailExists(username, email);
         String password = passwordEncoder.encode(registerCommand.getPassword());
         User newUser = new User(username, email, password, null);

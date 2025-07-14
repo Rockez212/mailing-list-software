@@ -14,18 +14,19 @@ import java.util.Objects;
 @Setter
 public class Request {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "request_seq")
+    @SequenceGenerator(name = "request_seq", sequenceName = "request_id_seq", allocationSize = 1)
     private Long id;
-    @Column(name = "email")
+    @Column(name = "to_email")
     private String toEmail;
     @Column(name = "text")
     private String text;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "doneAt")
+    @Column(name = "done_at")
     private LocalDateTime doneAt;
 
     public Request(String toEmail, String text) {
